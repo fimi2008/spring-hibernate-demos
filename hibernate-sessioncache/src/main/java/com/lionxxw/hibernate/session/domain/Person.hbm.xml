@@ -8,7 +8,7 @@
 	 		table 表名  默认值：类名
 	 		catalog 数据库的名字
 	 -->
-	<class name="com.lionxxw.hibernate.session.domain.Person">
+	<class name="com.lionxxw.hibernate.session.domain.Person" table="person" dynamic-update="true">
 		<!-- 
 			id为主键元素
 			  name 标示符属性

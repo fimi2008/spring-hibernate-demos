@@ -83,6 +83,12 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j-log4j12.version}</version>
         </dependency>
+        <!--使用该包中BeanUtils-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
     </dependencies>
 
     <build>

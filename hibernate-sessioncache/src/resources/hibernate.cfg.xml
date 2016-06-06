@@ -39,7 +39,19 @@
 	-->
 	<property name="show_sql">true</property>
 	<property name="format_sql">true</property>
+
+	<!--
+		1、把session放入到threadlocal中，确保线程安全
+		2、在整个线程中可以共享session，并且该session只有一个
+		3、在threadlocal中存放Map<SessionFactory,Session>,因为整个hibernate应用sessionFactory只有一个，所以session肯定只有一个
+	-->
+	<property name="current_session_context_class">thread</property>
+
 	<mapping
 		resource="com/lionxxw/hibernate/session/domain/Person.hbm.xml" />
+	<mapping
+			resource="com/lionxxw/hibernate/session/onetomany/single/Classes.hbm.xml" />
+	<mapping
+			resource="com/lionxxw/hibernate/session/onetomany/single/Student.hbm.xml" />
 </session-factory>
 </hibernate-configuration>
