@@ -192,7 +192,7 @@ public class OneToManySingleTest extends HibernateUtils {
         Transaction transaction = session.beginTransaction();
         Classes classes = (Classes)session.get(Classes.class, 1L);
         Set<Student> students = classes.getStudents();
-        classes.setStudents(null);
+        classes.setStudents(null);//在students集合提取出来以后，解除关系(不然会报错remove deleted object from associations)
         for (Student student : students) {
             if(student.getSid().longValue()==4){
                 session.delete(student);
