@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <p>Description: 一对多的单项操作 </p>
+ * <p>Description: 一对多的单向操作 </p>
  * 一般操作
  *  1、保存班级
  *  2、保存学生
