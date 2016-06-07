@@ -36,6 +36,17 @@ import java.util.Set;
  * 级联和关系的混合：
  *  14、在删除班级的时候，解除班级和学生之间的关系
  *
+ *
+ * 总结:
+ *      1、只能根据classes联系到student，但是通过student联系不到classes
+ *      2、只能classes维护关系
+ *      3、classes只要维护关系，就会发出维护关系的update语句
+ *      4、一对多，用一的一方维护关系，效率比较低
+ *      5、cascade与inverse的区别：
+ *               cascade指的是对象与对象之间的关系
+ *               inverse针对的是外键
+ *
+ *
  * @author wangxiang
  * @version 1.0
  * @time 16/6/6 上午11:04

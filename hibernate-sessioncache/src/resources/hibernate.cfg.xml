@@ -53,5 +53,9 @@
 			resource="com/lionxxw/hibernate/session/onetomany/single/Classes.hbm.xml" />
 	<mapping
 			resource="com/lionxxw/hibernate/session/onetomany/single/Student.hbm.xml" />
+	<mapping
+			resource="com/lionxxw/hibernate/session/onetomany/doubles/Classes2.hbm.xml" />
+	<mapping
+			resource="com/lionxxw/hibernate/session/onetomany/doubles/Student2.hbm.xml" />
 </session-factory>
 </hibernate-configuration>
