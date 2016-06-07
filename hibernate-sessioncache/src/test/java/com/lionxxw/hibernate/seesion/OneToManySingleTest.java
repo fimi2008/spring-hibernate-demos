@@ -30,9 +30,11 @@ import java.util.Set;
  *  9、已经存在一个学生，新建一个班级，把该学生加入到该班级(建立关系操作)
  *  10、已经存在一个学生，已经存在一个班级，把该学生加入到该班级
  *  11、已经存在一个学生，把一个学生从一个班级转移到另外一个班级
+ *  12、解除一个班级和所有学生之间的关系
+ *  13、解除一个班级和所有的学生之间的关系,重新建立该班级和其他的学生之间的关系
  *
  * 级联和关系的混合：
- *  12、在删除班级的时候，解除班级和学生之间的关系
+ *  14、在删除班级的时候，解除班级和学生之间的关系
  *
  * @author wangxiang
  * @version 1.0
@@ -223,6 +225,108 @@ public class OneToManySingleTest extends HibernateUtils {
          * 所以要发出insert语句
          */
         classes.getStudents().add(student);
+        transaction.commit();
+    }
+
+    /**
+     * 已经存在一个学生，新建一个班级，把该学生加入到该班级(建立关系操作)
+     * Hibernate:
+     *        update
+     *        student
+     *        set
+     *        cid=?
+     *        where
+     *        sid=?
+     *        发出维护关系的update
+     *
+     * 前提: Classes.hbm.xml 中students 配置 inverse="false"
+     **/
+    @Test
+    public void testSaveClasses_BuildR(){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Student student = (Student) session.get(Student.class, 1L);
+        Classes classes = new Classes();
+        classes.setName("新建一个班级");
+        classes.setDescription("已经存在一个学生，新建一个班级，把该学生加入到该班级(建立关系操作)");
+        Set<Student> students = new HashSet<Student>();
+        students.add(student);
+        classes.setStudents(students);
+        session.save(classes);
+        transaction.commit();
+    }
+
+    /**
+     * 已经存在一个学生，已经存在一个班级，把该学生加入到该班级
+     *
+     * 前提: Classes.hbm.xml 中students 配置 inverse="false"
+     */
+    @Test
+    public void testBuildR(){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Student student = (Student) session.get(Student.class, 1L);
+        Classes classes = (Classes) session.get(Classes.class, 1L);
+        classes.getStudents().add(student);
+        transaction.commit();
+    }
+
+    /**
+     * 已经存在一个学生，把一个学生从一个班级转移到另外一个班级
+     */
+    @Test
+    public void testTransform(){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Student student = (Student) session.get(Student.class, 3L);
+        Classes classes = (Classes) session.get(Classes.class, 1L);
+        classes.getStudents().add(student);
+        transaction.commit();
+    }
+
+    /**
+     * 解除一个班级和所有学生之间的关系
+     * Hibernate:
+     *        update
+     *        student
+     *        set
+     *        cid=null
+     *        where
+     *        cid=?
+     */
+    @Test
+    public void testRemove(){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Classes classes = (Classes) session.get(Classes.class, 4L);
+        classes.setStudents(null);
+        transaction.commit();
+    }
+
+    /**
+     * 解除一个班级和所有的学生之间的关系,重新建立该班级和其他的学生之间的关系
+     */
+    @Test
+    public void testResetClasses(){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Classes classes = (Classes) session.get(Classes.class, 1L);
+        Student student = (Student) session.get(Student.class, 2L);
+        Set<Student> students = new HashSet<Student>();
+        students.add(student);
+        classes.setStudents(students);
+        transaction.commit();
+    }
+
+    /**
+     * 在删除班级的时候，解除班级和学生之间的关系
+     */
+    @Test
+    public void testDeleteClasses(){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Classes classes = (Classes) session.get(Classes.class, 1L);
+        session.delete(classes);
         transaction.commit();
     }
 }
