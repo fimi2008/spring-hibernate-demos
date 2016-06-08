@@ -9,8 +9,9 @@
 		<property name="name" length="20"></property>
 		<property name="description" length="50"></property>
 		<!--
+			一多一和一对多的区别:多了一个unique="true"
 			unique 外键是唯一的, 添加了一个唯一的约束
 		-->
-		<many-to-one name="person" class="com.lionxxw.hibernate.session.onetoone.Person" unique="true"></many-to-one>
+		<many-to-one name="person" class="com.lionxxw.hibernate.session.onetoone.PersonOne" unique="true"/>
 	</class>
 </hibernate-mapping>

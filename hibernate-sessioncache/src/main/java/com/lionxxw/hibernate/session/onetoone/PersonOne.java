@@ -3,7 +3,7 @@ package com.lionxxw.hibernate.session.onetoone;
 import java.io.Serializable;
 import java.util.Set;
 
-public class Person implements Serializable{
+public class PersonOne implements Serializable{
 	private Long pid;
 	private String name;
 	private String description;

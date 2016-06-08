@@ -7,13 +7,13 @@ public class CourseOne implements Serializable{
 	private String name;
 	private String description;
 
-	private Person person;
+	private PersonOne person;
 
-	public Person getPerson() {
+	public PersonOne getPerson() {
 		return person;
 	}
 
-	public void setPerson(Person person) {
+	public void setPerson(PersonOne person) {
 		this.person = person;
 	}
 
