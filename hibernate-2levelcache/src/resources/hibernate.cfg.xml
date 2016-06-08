@@ -34,7 +34,20 @@
 		update  检查，如果和映射文件不一致，则更新表的结构，如果没有表，则会创建表
 	-->
 	<property name="hbm2ddl.auto">update</property>
-	<!-- 
+
+	<!--
+		开启二级缓存
+	-->
+	<property name="cache.use_second_level_cache">true</property>
+
+	<!--
+		二级缓存的供应商
+	-->
+	<property name="cache.provider_class">
+		org.hibernate.cache.EhCacheProvider
+	</property>
+
+	<!--
 		显示sql语句
 	-->
 	<property name="show_sql">true</property>
@@ -46,26 +59,24 @@
 		3、在threadlocal中存放Map<SessionFactory,Session>,因为整个hibernate应用sessionFactory只有一个，所以session肯定只有一个
 	-->
 	<property name="current_session_context_class">thread</property>
+	<!--
+		二级缓存统计机制
+	-->
+	<property name="generate_statistics">true</property>
 
 	<mapping
-		resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/domain/Person.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/onetomany/single/Classes.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/onetomany/single/Student.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/onetomany/doubles/Classes2.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/onetomany/doubles/Student2.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/manytomany/ClassesM.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/manytomany/StudentM.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/manytomany/Course.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/onetoone/PersonOne.hbm.xml" />
-	<mapping
-			resource="com/lionxxw/hibernate/twolevelcache/hibernate/session/onetoone/CourseOne.hbm.xml" />
+		resource="com/lionxxw/hibernate/twolevelcache/domain/Person.hbm.xml" />
+
+	<!--
+		开启了类级别的二级缓存
+		usage  二级缓存的缓存策略
+		read-only
+		可以把一个对象放入到二级缓存中,但是不能修改
+		read-write
+		可以把一个对象放入到二级缓存中，可以读可以改
+		class  类的全名
+	-->
+	<class-cache class="com.lionxxw.hibernate.twolevelcache.domain.Person" usage="read-only"/>
+
 </session-factory>
 </hibernate-configuration>

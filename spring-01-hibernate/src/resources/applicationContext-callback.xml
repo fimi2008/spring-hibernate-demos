@@ -8,11 +8,11 @@
            http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
            http://www.springframework.org/schema/tx 
            http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-	<bean class="com.lionxxw.spring.hibernate.callback.CustomTemplate" id="customTemplate">
+	<bean class="com.lionxxw.hibernate.twolevelcache.spring.hibernate.callback.CustomTemplate" id="customTemplate">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
 
-	<bean class="com.lionxxw.spring.hibernate.callback.CustomClassesDao" id="customClassesDao" parent="customTemplate"></bean>
+	<bean class="com.lionxxw.hibernate.twolevelcache.spring.hibernate.callback.CustomClassesDao" id="customClassesDao" parent="customTemplate"></bean>
 </beans>
