@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.lionxxw.hibernate.session.onetoone.CourseOne" table="course_one">
+		<id name="cid" length="5">
+			<generator class="increment"></generator>
+		</id>
+		<property name="name" length="20"></property>
+		<property name="description" length="50"></property>
+		<!--
+			unique 外键是唯一的, 添加了一个唯一的约束
+		-->
+		<many-to-one name="person" class="com.lionxxw.hibernate.session.onetoone.Person" unique="true"></many-to-one>
+	</class>
+</hibernate-mapping>
